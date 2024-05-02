@@ -1,0 +1,34 @@
+services:
+  matomo:
+    container_name: matomo
+    image: matomo
+    ports:
+      {% if cookiecutter.matomo_port %}
+      - {{ cookiecutter.matomo_port }}:80 
+      {% else %}
+      - "127.0.0.1:8080:80"
+      {% endif %}
+    environment:
+      - MATOMO_DATABASE_HOST=matomo_db
+    env_file:
+      - ./db.env
+      - ./matomo.env
+    volumes:
+      - data:/var/www/html
+    depends_on:
+      - matomo_db
+    restart: unless-stopped
+
+  matomo_db:
+    container_name: matomo_db
+    image: mariadb
+    command: --max-allowed-packet=64MB
+    env_file:
+      - ./db.env
+    volumes:
+      - db-data:/var/lib/mysql
+    restart: unless-stopped
+
+volumes:
+  data:
+  db-data:

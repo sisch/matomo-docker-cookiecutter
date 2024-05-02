@@ -1,0 +1,10 @@
+{
+    "matomo_root_dir": "matomo",
+    "matomo_vhost": "matomo.example.com",
+    "matomo_port": "127.0.0.1:8080",
+    "db_rand_root_pass": true,
+    "db_dbname": "matomo",
+    "db_user": "matomo",
+    "db_pass": "matomo",
+    "db_prefix": "matomo_"
+}
